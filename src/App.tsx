@@ -1,42 +1,42 @@
 import { CircleUserRound, FolderOpenDot, Linkedin } from 'lucide-react';
 import AboutMe from './components/AboutMe.tsx';
 import SocialLinks from './components/SocialLinks.tsx';
+import Projects from './components/Projects.tsx'; // Import the new Projects component
 import { Dock, DockIcon } from './components/magicui/dock.tsx';
 import { useState } from 'react';
 import './App.css';
 import { BorderBeam } from './components/magicui/border-beam.tsx';
 
-
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 function App() {
-  const [showSocialLinks, setShowSocialLinks] = useState(false);
+  const [activePage, setActivePage] = useState<'about' | 'social' | 'projects'>('about');
 
-  const toggleSocialLinks = () => {
-    setShowSocialLinks(!showSocialLinks);
+  const togglePage = (page: 'about' | 'social' | 'projects') => {
+    setActivePage(page);
   };
 
   return (
-    <div className="App" onClick={toggleSocialLinks}>
+    <div className="App">
       <main>
         <Dock direction="middle">
-        <DockIcon>
-        <CircleUserRound />
-        </DockIcon>
-        <DockIcon>
-          <Linkedin />
-        </DockIcon>
-        <DockIcon>
-          <FolderOpenDot />
-        </DockIcon>
-      </Dock>
-      <BorderBeam />
-      
-      {showSocialLinks ? <SocialLinks /> : <AboutMe />}
+          <DockIcon onClick={() => togglePage('about')}>
+            <CircleUserRound />
+          </DockIcon>
+          <DockIcon onClick={() => togglePage('social')}>
+            <Linkedin />
+          </DockIcon>
+          <DockIcon onClick={() => togglePage('projects')}>
+            <FolderOpenDot />
+          </DockIcon>
+        </Dock>
+        <BorderBeam />
+        
+        {activePage === 'social' ? <SocialLinks /> : activePage === 'projects' ? <Projects /> : <AboutMe />}
       </main>
     </div>
   );
-};
+}
 
 const Icons = {
   gitHub: (props: IconProps) => (
