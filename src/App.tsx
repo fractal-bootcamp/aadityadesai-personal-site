@@ -1,12 +1,23 @@
 import { CircleUserRound, FolderOpenDot, Linkedin } from 'lucide-react';
-import AboutMe from './components/AboutMe.tsx'
+import AboutMe from './components/AboutMe.tsx';
+import SocialLinks from './components/SocialLinks.tsx';
 import { Dock, DockIcon } from './components/magicui/dock.tsx';
+import { useState } from 'react';
+import './App.css';
+import { BorderBeam } from './components/magicui/border-beam.tsx';
+
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 function App() {
+  const [showSocialLinks, setShowSocialLinks] = useState(false);
+
+  const toggleSocialLinks = () => {
+    setShowSocialLinks(!showSocialLinks);
+  };
+
   return (
-    <div className="App">
+    <div className="App" onClick={toggleSocialLinks}>
       <main>
         <Dock direction="middle">
         <DockIcon>
@@ -19,7 +30,9 @@ function App() {
           <FolderOpenDot />
         </DockIcon>
       </Dock>
-        <AboutMe />
+      <BorderBeam />
+      
+      {showSocialLinks ? <SocialLinks /> : <AboutMe />}
       </main>
     </div>
   );

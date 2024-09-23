@@ -1,0 +1,17 @@
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Centers text inside the flex container */
+  margin-top: 20px; /* Optional: space above the centered content */
+}
+
+.social-links {
+  margin-top: 10px; /* Optional: space between the heading and the links */
+}
+
+.social-links a {
+  margin: 0 10px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the current text color */
+}
